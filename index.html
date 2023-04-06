@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="Style.css">
+    </head>
+    <body>
+<form>
+
+        <input type="text" name="result" id="result" readonly>
+        <br>
+        <input type="button" value="1" onclick="addToResult('1')">
+        <input type="button" value="2" onclick="addToResult('2')">
+        <input type="button" value="3" onclick="addToResult('3')">
+        <input type="button" value="+" onclick="operazione('+')">
+        <br>
+        <input type="button" value="4" onclick="addToResult('4')">
+        <input type="button" value="5" onclick="addToResult('5')">
+        <input type="button" value="6" onclick="addToResult('6')">
+        <input type="button" value="-" onclick="operazione('-')">
+        <br>
+        <input type="button" value="7" onclick="addToResult('7')">
+        <input type="button" value="8" onclick="addToResult('8')">
+        <input type="button" value="9" onclick="addToResult('9')">
+        <input type="button" value="*" onclick="operazione('*')">
+        <br>
+        <input type="button" value="C" onclick="clearResult()">
+        <input type="button" value="0" onclick="addToResult('0')">
+        <input type="button" value="=" onclick="calculateResult()">
+        <input type="button" value="/" onclick="operazione('/')">
+      </form>
+      
+      <script>
+
+        var calcolo="";
+
+        function addToResult(value) {
+          document.getElementById('result').value += value;
+          calcolo += value;
+        }
+      
+        function clearResult() {
+          document.getElementById('result').value = '';
+          calcolo = "";
+        }
+      
+        function calculateResult() {
+          document.getElementById('result').value = eval(calcolo);
+          calcolo = eval(calcolo);
+        }
+        document.addEventListener('keydown', function(event) {
+            const allowedKeys = /^[0-9+\-*/]|Enter|Backspace$/;
+        if (allowedKeys.test(event.key)) {
+            if (event.key === 'Enter') {
+            calculateResult();
+            } else if (event.key === 'Backspace') {
+            deleteLastCharacter();
+            } else {
+            addToResult(event.key);
+            }
+            event.preventDefault();
+        }
+        });
+
+        function operazione(value){
+          calcolo += value;
+          document.getElementById('result').value = "";
+        }
+
+        function deleteLastCharacter() {
+        const resultInput = document.getElementById('result');
+        const currentValue = resultInput.value;
+        resultInput.value = currentValue.substring(0, currentValue.length - 1);
+        }
+
+                
+            </script>
+            </body>
+            
